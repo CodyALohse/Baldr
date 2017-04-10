@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 
 namespace Core.Tests
 {
@@ -24,16 +25,15 @@ namespace Core.Tests
         }
 
         [TestMethod]
-        public void Test_AddEntity()
+        public void AddValidEntity()
         {
-            var baseModelGuid = Guid.NewGuid();
+            var baseModelId = 123; 
 
             var baseModel = new BaseModel
             {
-                Id = baseModelGuid
+                Id = baseModelId
             };
 
-            this.FakeContextProvider.fakeContext.Clear();
             var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
             baseRepository.Add(baseModel);
 
@@ -41,16 +41,74 @@ namespace Core.Tests
         }
 
         [TestMethod]
-        public void Test_GetEntityById()
+        public void AddNullEntity_ThrowsNullException()
         {
-            var baseModelGuid = Guid.NewGuid();
+            var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
+            Assert.ThrowsException<ArgumentNullException>(() => baseRepository.Add(null));
+        }
+
+        [TestMethod]
+        public void AddValidEntiyRange()
+        {
+            var baseModelId1 = 123;
+
+            var baseModel1 = new BaseModel
+            {
+                Id = baseModelId1
+            };
+
+            var baseModelId2 = 321;
+            var baseModel2 = new BaseModel
+            {
+                Id = baseModelId2
+            };
+
+            var entityList = new List<BaseModel> { baseModel1, baseModel2 };
+
+            var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
+            baseRepository.AddRange(entityList);
+
+            Assert.AreEqual(2, this.FakeContextProvider.fakeContext.Count);
+            Assert.IsTrue(this.FakeContextProvider.fakeContext.Any(e => ((BaseModel)e).Id == baseModelId1));
+            Assert.IsTrue(this.FakeContextProvider.fakeContext.Any(e => ((BaseModel)e).Id == baseModelId2));
+        }
+
+        [TestMethod]
+        public void AddRangeWithEmptyList()
+        {
+            var emptyList = new List<BaseModel>();
+            var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
+            baseRepository.AddRange(emptyList);
+
+            Assert.AreEqual(0, this.FakeContextProvider.fakeContext.Count);
+        }
+
+        [TestMethod]
+        public void FindEntityById() {
+            var baseModelId = 123;
 
             var baseModel = new BaseModel
             {
-                Id = baseModelGuid
+                Id = baseModelId
             };
 
-            this.FakeContextProvider.fakeContext.Clear();
+            this.FakeContextProvider.Add(baseModel);
+
+            var findValue = this.UnitOfWork.GetRepository<BaseModel>().Find(o => o.Id == baseModelId);
+
+            Assert.AreEqual(baseModelId, findValue.FirstOrDefault(v => v.Id == baseModelId).Id);
+        }
+
+        [TestMethod]
+        public void GetEntityById()
+        {
+            var baseModelId = 123;
+
+            var baseModel = new BaseModel
+            {
+                Id = baseModelId
+            };
+
             this.FakeContextProvider.Add(baseModel);
 
             var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
@@ -58,5 +116,16 @@ namespace Core.Tests
 
             Assert.AreEqual(baseModel.Id, getValue.Id);
         }
+
+        [TestMethod]
+        public void TryGetEntityWithInvalidId_ReturnsNull()
+        {
+            var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
+            var getValue = baseRepository.Get(123);
+
+            Assert.IsNull(getValue);
+        }
+
+
     }
 }

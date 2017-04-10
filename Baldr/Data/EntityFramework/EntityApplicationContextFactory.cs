@@ -1,3 +1,4 @@
+using Data.EntityFramework.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,7 @@ namespace Data.EntityFramework
             IConfigurationRoot config = builder.Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseInMemoryDatabase(config.GetConnectionString("DefaultConnection"));
+            optionsBuilder.GetDbProvider(options.EnvironmentName, config["ConnectionStrings:DefaultConnection"]);
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

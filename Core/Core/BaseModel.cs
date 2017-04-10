@@ -8,7 +8,7 @@ namespace Core
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public DateTimeOffset CreatedOn { get; set; }
 

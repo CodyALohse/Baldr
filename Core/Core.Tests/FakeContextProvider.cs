@@ -18,7 +18,7 @@ namespace Core.Tests
 
         public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
-            throw new NotImplementedException();
+            this.fakeContext.AddRange(entities);
         }
 
         public IEnumerable<TEntity> Find<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
@@ -26,14 +26,14 @@ namespace Core.Tests
             throw new NotImplementedException();
         }
 
-        public TEntity Get<TEntity>(Guid id) where TEntity : class
+        public TEntity Get<TEntity>(int id) where TEntity : class
         {
             return (TEntity) this.fakeContext.FirstOrDefault(e => e.GetType().GetProperty("Id").GetValue(e).Equals(id));
         }
 
         public IEnumerable<TEntity> GetAll<TEntity>() where TEntity : class
         {
-            throw new NotImplementedException();
+            return this.fakeContext.Select(e => (TEntity)e).AsEnumerable();
         }
 
         public void Remove<TEntity>(TEntity entity) where TEntity : class

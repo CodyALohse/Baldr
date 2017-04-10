@@ -10,6 +10,10 @@ namespace Core
 
         public void Add(TEntity entity)
         {
+            if (entity == null) {
+                throw new ArgumentNullException();
+            }
+
             this.ContextProvider.Add(entity);
         }
 
@@ -23,7 +27,7 @@ namespace Core
             return this.ContextProvider.Find(predicate);
         }
 
-        public TEntity Get(Guid id)
+        public TEntity Get(int id)
         {
             return this.ContextProvider.Get<TEntity>(id);
         }

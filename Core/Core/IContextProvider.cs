@@ -14,7 +14,7 @@ namespace Core
 
         IEnumerable<TEntity> Find<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
 
-        TEntity Get<TEntity>(Guid id) where TEntity : class;
+        TEntity Get<TEntity>(int id) where TEntity : class;
 
         IEnumerable<TEntity> GetAll<TEntity>() where TEntity : class;
 

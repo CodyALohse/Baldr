@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Baldr.IntegrationTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "IntegrationTesting"
+      }
+    }
+  }
+}

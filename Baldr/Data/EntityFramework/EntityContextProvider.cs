@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Core;
+using Data.EntityFramework.Extensions;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Data.EntityFramework
 {
@@ -13,8 +15,12 @@ namespace Data.EntityFramework
         private DbContext Context {get; set;}
 
         private IConfiguration Configuration;
-        public EntityContextProvider(IConfiguration configuration){
+
+        private readonly IHostingEnvironment HostingEnvironment;
+
+        public EntityContextProvider(IConfiguration configuration, IHostingEnvironment hostingEnvironment){
             this.Configuration = configuration;
+            this.HostingEnvironment = hostingEnvironment;
         }
 
         private DbContext ApplicationContext
@@ -23,11 +29,19 @@ namespace Data.EntityFramework
             {
                 if (this.Context == null)
                 {
-                    // TODO need to pass in the connection string here I think
                     var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                    optionsBuilder.UseInMemoryDatabase(this.Configuration.GetConnectionString("DefaultConnection"));
-                
+                    optionsBuilder.GetDbProvider(this.HostingEnvironment.EnvironmentName, this.Configuration["ConnectionStrings:DefaultConnection"]);
+
                     this.Context = new ApplicationDbContext(optionsBuilder.Options);
+
+                    // TODO this should be moved to the testing class instead of here
+                    // TODO not sure right now if it runs the latest migration?
+                    if (this.HostingEnvironment.EnvironmentName.Equals("IntegrationTesting"))
+                    {
+                        // Delete the database per test. This wil probably cause horrible integration testing latency if many tests are to be run
+                        this.Context.Database.EnsureDeleted();
+                        this.Context.Database.Migrate();
+                    }
                 }
 
                 return this.Context;
@@ -54,7 +68,7 @@ namespace Data.EntityFramework
             return this.ApplicationContext.Set<TEntity>().Where(predicate);
         }
 
-        public TEntity Get<TEntity>(Guid id) where TEntity : class
+        public TEntity Get<TEntity>(int id) where TEntity : class
         {
             return this.ApplicationContext.Set<TEntity>().Find(id);
         }

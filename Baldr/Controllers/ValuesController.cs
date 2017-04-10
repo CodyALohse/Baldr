@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Core;
+using Baldr.Models;
 
 namespace Baldr.Controllers
 {
@@ -36,6 +34,17 @@ namespace Baldr.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            var institution = new Institution
+            {
+                ContactInfo = new Contact {
+                    Name = "Wells Fargo",
+                    Address1 = "123 Easy St.",
+                    Address2 = "St. 12301",
+                    Address3 = "Bob",
+                    City = ""
+
+                }
+            };
         }
 
         // PUT api/values/5

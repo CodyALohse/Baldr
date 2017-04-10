@@ -14,7 +14,7 @@ namespace Core
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
 
-        TEntity Get(Guid id);
+        TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
     }
