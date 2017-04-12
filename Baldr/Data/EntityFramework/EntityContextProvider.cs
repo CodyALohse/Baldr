@@ -50,7 +50,26 @@ namespace Data.EntityFramework
 
         public void Save()
         {
+            this.AddTimeStamp();
             this.ApplicationContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Adds the CreatedOn datetimeoffset for new entities and adds or updates the ModifiedOn datetimeoffset
+        /// </summary>
+        private void AddTimeStamp()
+        {
+            var entities = this.ApplicationContext.ChangeTracker.Entries().Where(x => x.Entity is BaseModel && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((BaseModel)entity.Entity).CreatedOn = DateTimeOffset.Now;
+                }
+
+                ((BaseModel)entity.Entity).ModifiedOn = DateTimeOffset.Now;
+            }
         }
 
         public void Add<TEntity>(TEntity entity) where TEntity : class

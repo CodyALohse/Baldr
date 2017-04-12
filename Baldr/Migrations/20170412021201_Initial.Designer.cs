@@ -9,9 +9,10 @@ using Baldr.Models.Enums;
 namespace Baldr.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170412021201_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -72,8 +73,6 @@ namespace Baldr.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("PostalCode");
-
                     b.Property<string>("State");
 
                     b.HasKey("Id");
@@ -94,8 +93,6 @@ namespace Baldr.Migrations
                     b.Property<bool>("IsActive");
 
                     b.Property<DateTimeOffset>("ModifiedOn");
-
-                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 

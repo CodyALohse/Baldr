@@ -9,8 +9,8 @@ using Baldr.Models.Enums;
 namespace Baldr.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170408223002_040820170516_first")]
-    partial class _040820170516_first
+    [Migration("20170412022626_UpdateContactAndInstitution")]
+    partial class UpdateContactAndInstitution
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,6 +73,8 @@ namespace Baldr.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("PostalCode");
+
                     b.Property<string>("State");
 
                     b.HasKey("Id");
@@ -93,6 +95,8 @@ namespace Baldr.Migrations
                     b.Property<bool>("IsActive");
 
                     b.Property<DateTimeOffset>("ModifiedOn");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
