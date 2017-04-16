@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Data.EntityFramework.Startup;
 
 namespace Baldr
 {
@@ -25,10 +26,14 @@ namespace Baldr
         public void ConfigureServices(IServiceCollection services)
         {
 
-           // services.AddDataProvider();
+            services.AddDataProvider();
 
             // Add framework services.
             services.AddMvc();
+
+            // Add IConfiguration as a singleton so we can inject IConfiguration
+            // into other classes to load settings from a json file.
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

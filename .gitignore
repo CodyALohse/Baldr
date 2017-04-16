@@ -7,3 +7,5 @@ Core/Core/bin
 Core/Core/obj
 Baldr.IntegrationTests/bin
 Baldr.IntegrationTests/obj
+Baldr/Baldr.csproj.user
+Baldr/Properties/PublishProfiles/FolderProfile.pubxml.user

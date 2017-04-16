@@ -6,6 +6,8 @@ using Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Baldr.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Baldr.IntegrationTests
 {
@@ -74,6 +76,48 @@ namespace Baldr.IntegrationTests
             Assert.AreEqual(inst.ContactInfo.Name, getInst.ContactInfo.Name);
         }
 
+        [TestMethod]
+        public void CreateInstitutionAccount()
+        {
+            var account = new Account {
+                AccountNumber = "123",
+                Comment = "A Comment.",
+                InterestRate = 0.25M,
+                Name = "Test Account",
+                StartingBalance = 25.00M,
+                Type = Models.Enums.AccountType.Bank,
+                CurrentBalance = 45.00M
+            };
 
+            var inst = new Institution
+            {
+                Id = 10,
+                IsActive = true,
+                Name = "Wells Fargo",
+                Accounts = new List<Account>
+                {
+                    account
+                }
+            };
+
+            this.UnitOfWork.GetRepository<Institution>().Add(inst);
+
+            this.UnitOfWork.Save();
+
+            var getInst = this.UnitOfWork.GetRepository<Institution>().Get(10);
+
+            Assert.AreEqual(inst.Name, getInst.Name);
+            Assert.AreEqual(inst.IsActive, getInst.IsActive);
+
+            var instAccount = inst.Accounts.First();
+            var getInstAccount = getInst.Accounts.First();
+            Assert.AreEqual(instAccount.AccountNumber, getInstAccount.AccountNumber);
+            Assert.AreEqual(instAccount.Comment, getInstAccount.Comment);
+            Assert.AreEqual(instAccount.InterestRate, getInstAccount.InterestRate);
+            Assert.AreEqual(instAccount.Name, getInstAccount.Name);
+            Assert.AreEqual(instAccount.StartingBalance, getInstAccount.StartingBalance);
+            Assert.AreEqual(instAccount.Type, getInstAccount.Type);
+            Assert.AreEqual(instAccount.CurrentBalance, getInstAccount.CurrentBalance);
+        }
     }
 }
