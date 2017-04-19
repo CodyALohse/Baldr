@@ -41,7 +41,7 @@ namespace Baldr
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            loggerFactory.AddFile("Logs/baldr-{Date}.txt");
             app.UseMvc();
         }
     }

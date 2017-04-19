@@ -20,3 +20,15 @@ Setting Environment - Set Environment Variables under Project properties -> Debu
 Set ASPNETCORE_ENVIRONMENT
 https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments
 
+## Running as a Windows Service
+Since this project right now is being run on an internal network only the application does not need
+to be run behind a reverse proxy such as IIS. In order to run the application in the background 
+the application will be created as a windows service. At the moment dotnet core base libraries do not 
+have support for creating windows services without creating a dependency on the entire .Net framework. 
+There maybe future support from the dotnet core libraries but at this time it doesn't appear to be
+actively persued.
+Instead the project uses a 3rd party lib to provide the windows service functionality. 
+
+https://github.com/dasMulli/dotnet-win32-service
+
+
