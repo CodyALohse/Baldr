@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Core;
 using Baldr.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Baldr.Controllers
 {
@@ -9,15 +10,18 @@ namespace Baldr.Controllers
     public class ValuesController : Controller
     {
         protected IUnitOfWork UnitOfWork;
+        protected ILogger Logger;
 
-        public ValuesController(IUnitOfWork unitOfWork) {
+        public ValuesController(IUnitOfWork unitOfWork, ILogger<ValuesController> logger) {
             this.UnitOfWork = unitOfWork;
+            this.Logger = logger;
         }
         
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            this.Logger.LogInformation("Getting values");
             return new string[] { "value1", "value2", "value3", "value4" };
         }
 

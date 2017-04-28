@@ -18,10 +18,10 @@ namespace Baldr
                 writer.WriteLine("Application starting");
 
 
-                //if (Debugger.IsAttached || args.Contains("--console"))
-                //{
-                //    isService = false;
-                //}
+                if (Debugger.IsAttached || args.Contains("--console"))
+                {
+                    isService = false;
+                }
 
                 pathToContentRoot = Directory.GetCurrentDirectory();
                 writer.WriteLine($"Content root : {pathToContentRoot}");
