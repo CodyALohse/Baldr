@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <ExcludeFilesFromDeployment>
+      appsettings.json;appsettings.Development.json;appsettings.Release.json
+    </ExcludeFilesFromDeployment>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,5 +29,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core\Core.csproj" />
   </ItemGroup>
-
 </Project>
+

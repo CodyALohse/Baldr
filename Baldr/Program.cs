@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Linq;
 using System.Diagnostics;
 using Baldr.WindowsService;
+using Core.Bootstrap;
 
 namespace Baldr
 {
@@ -12,41 +13,33 @@ namespace Baldr
         {
             bool isService = true;
             string pathToContentRoot = string.Empty;
-            var fileStream = new FileStream("E:\\Dev\\netCore\\publish\\log.txt", FileMode.OpenOrCreate);
-            using (var writer = new StreamWriter(fileStream))
+
+            BootstrapLogger.Log("Application starting");      
+
+            if (Debugger.IsAttached || args.Contains("--console"))
             {
-                writer.WriteLine("Application starting");
-
-
-                if (Debugger.IsAttached || args.Contains("--console"))
-                {
-                    isService = false;
-                }
-
-                pathToContentRoot = Directory.GetCurrentDirectory();
-                writer.WriteLine($"Content root : {pathToContentRoot}");
-
-                if (isService)
-                {
-                    writer.WriteLine("Running as a service.");
-                    var assemblyPath = typeof(Program).GetTypeInfo().Assembly.Location;
-                    writer.WriteLine($"Assembly path : {assemblyPath}");
-                    pathToContentRoot = Path.GetDirectoryName(assemblyPath);
-                    writer.WriteLine($"Service content root : {pathToContentRoot}");
-                }
+                isService = false;
             }
 
+            pathToContentRoot = Directory.GetCurrentDirectory();
+            BootstrapLogger.Log($"Content root : {pathToContentRoot}");
+            
             if (isService)
             {
+                BootstrapLogger.Log("Running as a service.");
+
+                var assemblyPath = typeof(Program).GetTypeInfo().Assembly.Location;
+                pathToContentRoot = Path.GetDirectoryName(assemblyPath);
+                BootstrapLogger.Log($"Assembly path : {assemblyPath}");
+                BootstrapLogger.Log($"Service content root : {pathToContentRoot}");
+
                 WindowsServiceRunner.Run(pathToContentRoot);
             }
             else
             {
+                BootstrapLogger.Log("Running as a non-service.");
                 Host.BuildAndRun(pathToContentRoot);
             }
-            
         }
-
-        
     }
 }

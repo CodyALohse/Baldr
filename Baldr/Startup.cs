@@ -39,9 +39,15 @@ namespace Baldr
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            var logFilePath = this.Configuration["Logging:LogFilePath"];
+            if (string.IsNullOrEmpty(logFilePath))
+            {
+                logFilePath = "./";
+            }
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            loggerFactory.AddFile("Logs/baldr-{Date}.txt");
+            loggerFactory.AddFile($"{logFilePath}/baldr-{{Date}}.txt");
             app.UseMvc();
         }
     }
