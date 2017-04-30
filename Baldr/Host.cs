@@ -17,7 +17,7 @@ namespace Baldr
               .Build();
         }
 
-        public static void BuildAndRun(string pathToContentRoot)
+        public static void BuildAndRunHost(string pathToContentRoot)
         {
             var host = BuildHost(pathToContentRoot);
             host.Run();

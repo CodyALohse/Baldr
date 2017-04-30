@@ -11,20 +11,14 @@ namespace Baldr
     {
         public static void Main(string[] args)
         {
-            bool isService = true;
             string pathToContentRoot = string.Empty;
 
             BootstrapLogger.Log("Application starting");      
 
-            if (Debugger.IsAttached || args.Contains("--console"))
-            {
-                isService = false;
-            }
-
             pathToContentRoot = Directory.GetCurrentDirectory();
             BootstrapLogger.Log($"Content root : {pathToContentRoot}");
             
-            if (isService)
+            if ( !Debugger.IsAttached && args.Contains("--console"))
             {
                 BootstrapLogger.Log("Running as a service.");
 
@@ -38,7 +32,7 @@ namespace Baldr
             else
             {
                 BootstrapLogger.Log("Running as a non-service.");
-                Host.BuildAndRun(pathToContentRoot);
+                Host.BuildAndRunHost(pathToContentRoot);
             }
         }
     }
