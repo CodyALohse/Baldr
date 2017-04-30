@@ -31,4 +31,15 @@ Instead the project uses a 3rd party lib to provide the windows service function
 
 https://github.com/dasMulli/dotnet-win32-service
 
+## Logging
+### Bootstrap Logger
+Used to log basic messages to a text file prior to the main logging framework takes over. Initially created to debug
+the windows service startup. The logger will not create the file automatically, in order to get the logger output
+a file with the name ``bootstraplog.log`` needs to be created next to the core.dll.
+
+### Serilog & Elasticsearch
+Serilog is used and configured to write output to Elasticsearch. Kibana can be used to visualize the output.
+Serilog can be configured via the appsettings.json file.
+
+https://github.com/serilog/serilog-sinks-elasticsearch
 

@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Data.EntityFramework.Startup;
+using Serilog;
+using Serilog.Sinks.Elasticsearch;
 
 namespace Baldr
 {
@@ -45,9 +47,20 @@ namespace Baldr
                 logFilePath = "./";
             }
 
+            var elasticsearchUrl = this.Configuration["Logging:ElasticsearchUrl"];
+            if (string.IsNullOrEmpty(elasticsearchUrl))
+            {
+                elasticsearchUrl = "http://localhost:9200";
+            }
+
+            var serilog = new LoggerConfiguration()
+                .ReadFrom.Configuration(this.Configuration)
+                .CreateLogger();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             loggerFactory.AddFile($"{logFilePath}/baldr-{{Date}}.txt");
+            loggerFactory.AddSerilog(serilog);
             app.UseMvc();
         }
     }
