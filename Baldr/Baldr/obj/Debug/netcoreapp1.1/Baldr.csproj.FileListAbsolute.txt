@@ -1,0 +1,11 @@
+E:\Dev\netCore\Baldr\Baldr\Baldr\bin\Debug\netcoreapp1.1\Baldr.deps.json
+E:\Dev\netCore\Baldr\Baldr\Baldr\bin\Debug\netcoreapp1.1\Baldr.runtimeconfig.json
+E:\Dev\netCore\Baldr\Baldr\Baldr\bin\Debug\netcoreapp1.1\Baldr.runtimeconfig.dev.json
+E:\Dev\netCore\Baldr\Baldr\Baldr\bin\Debug\netcoreapp1.1\Baldr.dll
+E:\Dev\netCore\Baldr\Baldr\Baldr\bin\Debug\netcoreapp1.1\Baldr.pdb
+E:\Dev\netCore\Baldr\Baldr\Baldr\bin\Debug\netcoreapp1.1\Core.dll
+E:\Dev\netCore\Baldr\Baldr\Baldr\bin\Debug\netcoreapp1.1\Core.pdb
+E:\Dev\netCore\Baldr\Baldr\Baldr\obj\Debug\netcoreapp1.1\Baldr.csprojResolveAssemblyReference.cache
+E:\Dev\netCore\Baldr\Baldr\Baldr\obj\Debug\netcoreapp1.1\Baldr.AssemblyInfo.cs
+E:\Dev\netCore\Baldr\Baldr\Baldr\obj\Debug\netcoreapp1.1\Baldr.dll
+E:\Dev\netCore\Baldr\Baldr\Baldr\obj\Debug\netcoreapp1.1\Baldr.pdb
