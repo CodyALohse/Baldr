@@ -126,6 +126,73 @@ namespace Core.Tests
             Assert.IsNull(getValue);
         }
 
+        [TestMethod]
+        public void RemoveRange()
+        {
+            var baseModelId1 = 123;
+
+            var baseModel1 = new BaseModel
+            {
+                Id = baseModelId1
+            };
+
+            var baseModelId2 = 321;
+            var baseModel2 = new BaseModel
+            {
+                Id = baseModelId2
+            };
+
+            var baseModelId3 = 567;
+            var baseModel3 = new BaseModel
+            {
+                Id = baseModelId3
+            };
+
+            var entityList = new List<BaseModel> { baseModel1, baseModel2, baseModel3 };
+            this.FakeContextProvider.fakeContext.AddRange(entityList);
+
+            var entityListItemsToRemove = new List<BaseModel> { baseModel1, baseModel3 };
+
+            var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
+            baseRepository.RemoveRange(entityListItemsToRemove);
+
+            Assert.AreEqual(1, this.FakeContextProvider.fakeContext.Count());
+            Assert.IsTrue(this.FakeContextProvider.fakeContext.Any(e => ((BaseModel)e).Id == baseModelId2));
+        }
+
+        [TestMethod]
+        public void RemoveSingle()
+        {
+            var baseModelId1 = 123;
+
+            var baseModel1 = new BaseModel
+            {
+                Id = baseModelId1
+            };
+
+            var baseModelId2 = 321;
+            var baseModel2 = new BaseModel
+            {
+                Id = baseModelId2
+            };
+
+            var baseModelId3 = 567;
+            var baseModel3 = new BaseModel
+            {
+                Id = baseModelId3
+            };
+
+            var entityList = new List<BaseModel> { baseModel1, baseModel2, baseModel3 };
+            this.FakeContextProvider.fakeContext.AddRange(entityList);
+
+            var baseRepository = this.UnitOfWork.GetRepository<BaseModel>();
+            baseRepository.Remove(baseModel1);
+
+            Assert.AreEqual(2, this.FakeContextProvider.fakeContext.Count());
+            Assert.IsTrue(this.FakeContextProvider.fakeContext.Any(e => ((BaseModel)e).Id == baseModelId2));
+            Assert.IsTrue(this.FakeContextProvider.fakeContext.Any(e => ((BaseModel)e).Id == baseModelId3));
+            Assert.IsFalse(this.FakeContextProvider.fakeContext.Any(e => ((BaseModel)e).Id == baseModelId1));
+        }
 
     }
 }

@@ -38,12 +38,14 @@ namespace Core.Tests
 
         public void Remove<TEntity>(TEntity entity) where TEntity : class
         {
-            throw new NotImplementedException();
+            var entityId = entity.GetType().GetProperty("Id").GetValue(entity);
+            this.fakeContext.RemoveAll(e => entityId.Equals(e.GetType().GetProperty("Id").GetValue(e)));
         }
 
         public void RemoveRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
-            throw new NotImplementedException();
+            var entityIdsToRemove = entities.Select(e => e.GetType().GetProperty("Id").GetValue(e));
+            this.fakeContext.RemoveAll(e => entityIdsToRemove.Any(e1 => e.GetType().GetProperty("Id").GetValue(e).Equals(e1)));
         }
 
         public void Save()

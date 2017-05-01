@@ -10,7 +10,8 @@ namespace Core
 
         public void Add(TEntity entity)
         {
-            if (entity == null) {
+            if (entity == null)
+            {
                 throw new ArgumentNullException();
             }
 
@@ -39,12 +40,17 @@ namespace Core
 
         public void Remove(TEntity entity)
         {
-            this.Remove(entity);
+            if (entity == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.ContextProvider.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            this.RemoveRange(entities);
+            this.ContextProvider.RemoveRange(entities);
         }
     }
 }

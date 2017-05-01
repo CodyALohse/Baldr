@@ -33,7 +33,7 @@ namespace Core.Bootstrap
                     streamWriter.WriteLine($"{DateTimeOffset.Now} - Caller: {objectName} : Line: {lineNumber} -- {message}");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Swallow the exception 
             }
