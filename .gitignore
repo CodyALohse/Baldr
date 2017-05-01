@@ -10,3 +10,7 @@ Baldr.IntegrationTests/obj
 Baldr/Baldr.csproj.user
 Baldr/Properties/PublishProfiles/FolderProfile.pubxml.user
 Baldr/Logs/*
+Baldr/Baldr.Tests/bin/*
+Baldr/Baldr.Tests/obj/*
+Baldr/Baldr/bin/*
+Baldr/Baldr/obj/*
