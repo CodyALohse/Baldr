@@ -11,9 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Modules\Account\V1\ApiMappers\" />
+    <Folder Include="Modules\Institution\V1\ApiMappers\" />
+    <Folder Include="Modules\Transaction\V1\ApiMappers\" />
+    <Folder Include="Modules\Transaction\V1\ApiModels\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.0.2" />
     <PackageReference Include="DasMulli.Win32.ServiceUtils" Version="1.0.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
