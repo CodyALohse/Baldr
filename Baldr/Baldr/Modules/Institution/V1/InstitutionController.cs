@@ -1,9 +1,7 @@
-﻿using Baldr.Modules.Institution.V1.ApiModels;
+﻿using AutoMapper;
+using Baldr.Modules.Institution.V1.ApiModels;
 using Core;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Baldr.Modules.Institution.V1
@@ -12,10 +10,12 @@ namespace Baldr.Modules.Institution.V1
     public class InstitutionController : Controller
     {
         protected IUnitOfWork UnitOfWork;
-        
-        public InstitutionController(IUnitOfWork unitOfWork)
+        protected IMapper Mapper;
+
+        public InstitutionController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.UnitOfWork = unitOfWork;
+            this.Mapper = mapper;
         }
 
         //GET 
@@ -26,16 +26,20 @@ namespace Baldr.Modules.Institution.V1
 
             var institution = await Task.Run( () => institutionRepository.Get(id));
 
+            institution = new Models.Institution {
+                Name = "test",
+                Id = 1,
+                IsActive = true,
+                CreatedOn = System.DateTimeOffset.MaxValue,
+                ModifiedOn = System.DateTimeOffset.MinValue
+            };
+
             if (institution == null)
             {
                 return NotFound();
             }
 
-            var institutionResult = new InstitutionResult
-            {
-                Message = "Hello",
-                TimeStamp = DateTimeOffset.Now.ToString("u")
-            };
+            var institutionResult = this.Mapper.Map<InstitutionResult>(institution);
 
             return Ok(institutionResult);
         }

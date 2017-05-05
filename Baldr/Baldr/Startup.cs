@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Data.EntityFramework.Startup;
 using Serilog;
+using AutoMapper;
+using Baldr.Modules.Institution.V1.ApiMappers;
 
 namespace Baldr
 {
@@ -30,6 +32,9 @@ namespace Baldr
 
             // Add framework services.
             services.AddMvc();
+
+            // Automapper
+            services.AddAutoMapper();
 
             // Add IConfiguration as a singleton so we can inject IConfiguration
             // into other classes to load settings from a json file.
