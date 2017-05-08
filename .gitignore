@@ -14,3 +14,6 @@ Baldr/Baldr.Tests/bin/*
 Baldr/Baldr.Tests/obj/*
 Baldr/Baldr/bin/*
 Baldr/Baldr/obj/*
+Baldr/Baldr.Web.Tests/bin/*
+Baldr/Baldr.Web.Tests/node_modules/*
+Baldr/Baldr.Web.Tests/obj/*
