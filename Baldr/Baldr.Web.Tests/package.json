@@ -3,11 +3,13 @@
   "name": "Baldr_WebTests",
   "private": true,
   "scripts": {
+    "build-webpack": "webpack",
     "test": "karma start karma.conf.js"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/jasmine": "^2.5.37",
+    "@types/karma": "^0.13.35",
     "@types/node": "^6.0.42",
     "@types/webpack": "^2.2.15",
     "@types/webpack-env": "^1.13.0",
@@ -20,6 +22,8 @@
     "karma-jasmine": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.0",
+    "awesome-typescript-loader": "^3.0.0",
+    "typescript": "^2.2.1"
   }
 }

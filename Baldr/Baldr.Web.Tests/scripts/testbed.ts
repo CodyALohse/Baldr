@@ -1,25 +1,30 @@
 ﻿// https://github.com/AngularClass/angular-starter/blob/master/config/spec-bundle.js
 
+//require('../node_modules/karma/');
+
 Error.stackTraceLimit = 0; // "No stacktrace"" is usually best for app testing.
 
 // Uncomment to get full stacktrace output. Sometimes helpful, usually not.
 // Error.stackTraceLimit = Infinity; //
 
-var nodeModulesPath = '../../Baldr.Web/node_modules/';
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
 
-require(nodeModulesPath + 'core-js/es6');
-require(nodeModulesPath + 'core-js/es7/reflect');
+// // Cancel Karma's synchronous start,
+//__karma__.loaded = function () { };
 
-require(nodeModulesPath + 'zone.js/dist/zone');
-require(nodeModulesPath + 'zone.js/dist/long-stack-trace-zone');
-require(nodeModulesPath + 'zone.js/dist/proxy'); // since zone.js 0.6.15
-require(nodeModulesPath + 'zone.js/dist/sync-test');
-require(nodeModulesPath + 'zone.js/dist/jasmine-patch'); // put here since zone.js 0.6.14
-require(nodeModulesPath + 'zone.js/dist/async-test');
-require(nodeModulesPath + 'zone.js/dist/fake-async-test');
+require('WebProjectNodeModules/core-js/es6');
+require('WebProjectNodeModules/core-js/es7/reflect');
 
-var testing = require(nodeModulesPath + '@angular/core/testing');
-var browser = require(nodeModulesPath + '@angular/platform-browser-dynamic/testing');
+require('WebProjectNodeModules/zone.js/dist/zone');
+require('WebProjectNodeModules/zone.js/dist/long-stack-trace-zone');
+require('WebProjectNodeModules/zone.js/dist/proxy'); // since zone.js 0.6.15
+require('WebProjectNodeModules/zone.js/dist/sync-test');
+require('WebProjectNodeModules/zone.js/dist/jasmine-patch'); // put here since zone.js 0.6.14
+require('WebProjectNodeModules/zone.js/dist/async-test');
+require('WebProjectNodeModules/zone.js/dist/fake-async-test');
+
+var testing = require('WebProjectNodeModules/@angular/core/testing');
+var browser = require('WebProjectNodeModules/@angular/platform-browser-dynamic/testing');
 
 testing.TestBed.initTestEnvironment(
   browser.BrowserDynamicTestingModule,
@@ -35,7 +40,7 @@ testing.TestBed.initTestEnvironment(
  * any file that ends with spec.ts and get its path. By passing in true
  * we say do this recursively
  */
-var testContext = require.context('./scripts', true, /\.spec\.ts/);
+var testContext = require.context('./specs', true, /\.spec\.ts/);
 
 /*
  * get all the files, for each file, call the context function
@@ -48,3 +53,5 @@ function requireAll(requireContext) {
 
 // requires and returns all modules that match
 var modules = requireAll(testContext);
+
+//__karma__.start();

@@ -8,8 +8,8 @@
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "lib": [ "es6", "dom" ],
-    "types": [ "node", "webpack", "webpack-env", "jasmine" ],
-    "outDir": "../"
+    "types": [ "node", "webpack", "webpack-env", "jasmine", "karma" ],
+    "outDir": "./dist/"
   },
   "exclude": [ "bin", "node_modules" ],
   "atom": { "rewriteTsconfig": false }

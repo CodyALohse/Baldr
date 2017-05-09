@@ -16,12 +16,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        '../Baldr.Web/wwwroot/dist/vendor.js',
-        '../Baldr.Web/wwwroot/dist/main-client.js',
+        //'../Baldr.Web/wwwroot/dist/vendor.js',
+        //'../Baldr.Web/wwwroot/dist/main-client.js',
 
-        { pattern: 'scripts/**/*.spec.ts', included: true, watched: false, served: true },
-
-        { pattern: '../Baldr.Web/Views/Home/*.cshtml', included: false, watched: true }
+        { pattern: 'dist/**/*.js', included: true, watched: false, served: true },
     ],
 
 
@@ -33,8 +31,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'scripts/testbed.ts': ['webpack'],
-        'scripts/**/*.spec.ts': ['webpack', 'sourcemap']
+        'scripts/testbed.ts': ['webpack', 'sourcemap'],
+        //'scripts/**/*.spec.ts': ['webpack', 'sourcemap']
     },
 
 
@@ -65,7 +63,7 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
-    mime: { 'application/javascript': ['ts','tsx'] },
+    mime: { 'application/javascript': ['ts'] },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -75,7 +73,7 @@ module.exports = function(config) {
     // how many browser should be started simultaneous
     concurrency: Infinity,
 
-    webpack: require('../Baldr.Web/webpack.config.js')().filter(config => config.target !== 'node'), // Test against client bundle, because tests run in a browser
+    webpack: require('./webpack.config.js'), // Test against client bundle, because tests run in a browser
 
     webpackMiddleware: { stats: 'errors-only' }
 
