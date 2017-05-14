@@ -19,7 +19,8 @@ module.exports = function(config) {
         //'../Baldr.Web/wwwroot/dist/vendor.js',
         //'../Baldr.Web/wwwroot/dist/main-client.js',
 
-        { pattern: 'dist/**/*.js', included: true, watched: false, served: true },
+        'scripts/testbed.ts'
+       //{ pattern: 'dist/**/*.js', included: true, watched: false, served: true },
     ],
 
 
@@ -73,7 +74,7 @@ module.exports = function(config) {
     // how many browser should be started simultaneous
     concurrency: Infinity,
 
-    webpack: require('./webpack.config.js'), // Test against client bundle, because tests run in a browser
+    webpack: require('./webpack.config.js'),
 
     webpackMiddleware: { stats: 'errors-only' }
 

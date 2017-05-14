@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "lib": [ "es6", "dom" ],
-    "types": [ "node"],
+    "types": [ "node", "webpack", "webpack-env", "jasmine", "karma" ],
     "typeRoots": [
       "node_modules/@types"
     ]

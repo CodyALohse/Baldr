@@ -17,3 +17,6 @@ Baldr/Baldr/obj/*
 Baldr/Baldr.Web.Tests/bin/*
 Baldr/Baldr.Web.Tests/node_modules/*
 Baldr/Baldr.Web.Tests/obj/*
+Baldr/Baldr.Web.Tests/dist/*
+.vs/Baldr/v14/.suo
+Baldr/Baldr.Web/.awcache/*

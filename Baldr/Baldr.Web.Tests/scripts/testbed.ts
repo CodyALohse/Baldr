@@ -1,6 +1,6 @@
 ﻿// https://github.com/AngularClass/angular-starter/blob/master/config/spec-bundle.js
 
-//require('../node_modules/karma/');
+//require('../node_modules/karma');
 
 Error.stackTraceLimit = 0; // "No stacktrace"" is usually best for app testing.
 
@@ -42,11 +42,7 @@ testing.TestBed.initTestEnvironment(
  */
 var testContext = require.context('./specs', true, /\.spec\.ts/);
 
-/*
- * get all the files, for each file, call the context function
- * that will require the file and load it up here. Context will
- * loop and require those spec files here
- */
+//https://webpack.js.org/guides/dependency-management/#require-context
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);
 }

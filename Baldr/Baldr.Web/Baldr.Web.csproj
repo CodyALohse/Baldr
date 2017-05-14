@@ -19,7 +19,12 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot/dist\89889688147bd7575d6327160d64e760.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientApp\dist\" />
     <Folder Include="ClientApp\src\app\core\" />
+    <Folder Include="wwwroot\dist\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
