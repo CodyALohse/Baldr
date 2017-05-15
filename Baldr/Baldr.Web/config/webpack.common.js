@@ -1,8 +1,15 @@
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 const configHelper = require('./configHelper');
+
+// TODO 
+// Minification for prod
+// Hashing of files for browser cache
+// Try to remove compilation of dlls each time webapack builds
+
 
 // All paths are realtive to this files location in the project.
 module.exports = function (options) {
@@ -12,15 +19,16 @@ module.exports = function (options) {
         // Webpack compilation starts here.
         // Multiple entry points are possible. Useful for splitting out code features to be delivered to the client separately.
         entry: {
-            'polyfills': configHelper.root('ClientApp/src/polyfills.ts'),
-            'app': configHelper.root('ClientApp/src/main.ts')
+            'polyfills': configHelper.appPath('polyfills.ts'),
+            'app': configHelper.appPath('main.ts')
         },
 
         // Location of webpack output
         output: {
-            path: configHelper.root('wwwroot/dist/'),
+            path: configHelper.projRootPath('wwwroot/dist/'),
             sourceMapFilename: '[file].map',
-            filename: '[name].bundle.js'
+            filename: '[name].bundle.js',
+            publicPath: 'dist/'
         },
 
         // File parsing rules and loaders
@@ -52,7 +60,7 @@ module.exports = function (options) {
                 {
                   test: /\.css$/,
                   use: ['to-string-loader', 'css-loader'],
-                  exclude: [configHelper.root('ClientApp/src', 'styles')]
+                  exclude: [configHelper.appPath('.', 'styles')]
                 },
             ]
         },
@@ -60,8 +68,8 @@ module.exports = function (options) {
         resolve: {
             // Supported file types
             extensions: ['.ts', '.js'],
-        
-            modules: [configHelper.root('ClientApp/src'), configHelper.root('node_modules')],    
+
+            modules: [configHelper.appPath('.'), configHelper.projRootPath('node_modules')],    
 
             // Alias paths in order to avoid messy imports everywhere.
             // Also allows for complex path configuration in one location. 
@@ -71,7 +79,17 @@ module.exports = function (options) {
 
         plugins: [
             new CheckerPlugin(),
-            new webpack.ProvidePlugin({ Reflect: 'core-js/es7/reflect' })
+
+            // Fixes issue where reflect is not being seen by another module
+            new webpack.ProvidePlugin({ Reflect: 'core-js/es7/reflect' }),
+
+            // Creates the html script imports in index.html
+            new HtmlWebpackPlugin({
+                template: configHelper.projRootPath('Views/Home/Index_Template.cshtml'),
+                title: 'Baldr',
+                filename: '../../Views/Home/Index.cshtml',
+                inject: 'body'
+            })
         ]
     }
 }

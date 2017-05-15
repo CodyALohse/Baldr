@@ -1,6 +1,7 @@
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
 const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
 const configHelper = require('./configHelper.js');
@@ -13,9 +14,6 @@ module.exports = function (options) {
 
         // Location of webpack output
         output: {
-        //    path: configHelper.root('ClientApp/dist'),
-        //    filename: '[name].bundle.js',
-        //    sourceMapFilename: '[file].map'
         },
 
         // File parsing rules and loaders
@@ -25,13 +23,6 @@ module.exports = function (options) {
         },
 
         resolve: {
-            // Supported file types
-            extensions: ['.ts', '.js'],
-
-            // Alias paths in order to avoid messy imports everywhere.
-            // Also allows for complex path configuration in one location. 
-            alias: {
-            }
         },
 
         plugins: [            
@@ -60,12 +51,17 @@ module.exports = function (options) {
                     'rxjs',
                   ]
                 },
-                dllDir: configHelper.root('wwwroot/dist/dll'),
+                dllDir: configHelper.appBuildPath('dll'),
                 webpackConfig: webpackMergeDll(commonConfig({env: ENV}), {
                   devtool: 'cheap-module-source-map',
                   plugins: []
                 })
               }),
+
+            new AddAssetHtmlPlugin([
+                { filepath: configHelper.appBuildPath(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
+                { filepath: configHelper.appBuildPath(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
+            ]),
         ]
     });
 }
