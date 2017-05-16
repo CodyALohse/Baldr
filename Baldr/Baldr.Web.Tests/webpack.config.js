@@ -21,12 +21,40 @@ module.exports = {
     // File parsing rules and loaders
     module: {
         rules: [
+            //{
+            //    test: /\.ts$/,
+            //    include: /specs/,
+            //    loader: 'awesome-typescript-loader?silent=true',
+            //    exclude: ['/node_modules/', '../Baldr.Web/node_modules/']
+            //},
+            //{
+            //    loader: 'angular2-template-loader',
+            //    exclude: [/node_modules/, '../Baldr.Web/node_modules/']
+            //},
             {
                 test: /\.ts$/,
-                include: /specs/,
-                loader: 'awesome-typescript-loader?silent=true',
-                exclude: ['/node_modules/', '../Baldr.Web/node_modules/']
-            }
+                use: [
+                    {
+                        loader: 'awesome-typescript-loader?silent=false',
+                        options: {
+                            tsconfig: 'tsconfig.json'  
+                        }
+                    },
+                    {
+                        loader: 'angular2-template-loader'
+                    }
+                ],
+                //exclude: [/\.(spec|e2e)\.ts$/]
+            },
+            {
+                test: /\.html$/,
+                use: 'raw-loader',
+            },
+            {
+                test: /\.css$/,
+                use: ['to-string-loader', 'css-loader'],
+               // exclude: [configHelper.appPath('.', 'styles')]
+            },
         ]
     },
 
@@ -37,7 +65,8 @@ module.exports = {
         // Alias paths in order to avoid messy imports everywhere.
         // Also allows for complex path configuration in one location. 
         alias: {
-            WebProjectNodeModules: path.resolve(__dirname, '../Baldr.Web/node_modules/')
+            WebProjectNodeModules: path.resolve(__dirname, '../Baldr.Web/node_modules/'),
+            WebProjectAppRoot: path.resolve(__dirname, '../Baldr.Web/ClientApp/src/')
         }
     },
 

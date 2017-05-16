@@ -9,6 +9,7 @@ const configHelper = require('./configHelper');
 // Minification for prod
 // Hashing of files for browser cache
 // Try to remove compilation of dlls each time webapack builds
+// webpack.config.js at root is using process.env to determine env...not sure that is going to work when not running with node
 
 
 // All paths are realtive to this files location in the project.
@@ -87,7 +88,7 @@ module.exports = function (options) {
             new HtmlWebpackPlugin({
                 template: configHelper.projRootPath('Views/Home/Index_Template.cshtml'),
                 title: 'Baldr',
-                filename: '../../Views/Home/Index.cshtml',
+                filename: configHelper.projRootPath('Views/Home/Index.cshtml'),
                 inject: 'body'
             })
         ]

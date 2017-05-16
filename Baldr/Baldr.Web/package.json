@@ -5,7 +5,8 @@
     "build:dev": "npm run clean && npm run webpack -- --config config/webpack.dev.js --progress --profile",
     "clean": "npm run rimraf -- wwwroot/dist/*",
     "rimraf": "rimraf",
-    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
+    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
+    "test": "karma start config/karma.conf.js"
   },
   "dependencies": {
     "@angular/animations": "^4.1.2",
