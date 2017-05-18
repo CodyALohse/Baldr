@@ -64,6 +64,7 @@ module.exports = {
 
         // Alias paths in order to avoid messy imports everywhere.
         // Also allows for complex path configuration in one location. 
+        // ***NOTE: Need to define the same alias in tsconfig file ***
         alias: {
             WebProjectNodeModules: path.resolve(__dirname, '../Baldr.Web/node_modules/'),
             WebProjectAppRoot: path.resolve(__dirname, '../Baldr.Web/ClientApp/src/')

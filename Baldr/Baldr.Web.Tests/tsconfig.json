@@ -9,7 +9,14 @@
     "skipDefaultLibCheck": true,
     "lib": [ "es6", "dom" ],
     "types": [ "node", "webpack", "webpack-env", "jasmine", "karma" ],
-    "outDir": "./dist/"
+    "outDir": "./dist/",
+    "baseUrl": "./",
+    "paths": {
+      // Define alias's for easy importing
+      // Also need to define the same alias in webpack config file
+      "WebProjectNodeModules/*": [ "../Baldr.Web/node_modules/*" ],
+      "WebProjectAppRoot/*": [ "../Baldr.Web/ClientApp/src/*" ]
+    }
   },
   "exclude": [ "bin", "node_modules" ],
   "atom": { "rewriteTsconfig": false }

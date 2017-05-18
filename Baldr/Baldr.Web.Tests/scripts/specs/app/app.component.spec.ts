@@ -1,5 +1,4 @@
 import { TestBed, async } from 'WebProjectNodeModules/@angular/core/testing';
-
 import { AppComponent } from 'WebProjectAppRoot/app/app.component';
 
 describe('AppComponent', () => {
