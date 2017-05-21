@@ -75,6 +75,7 @@ module.exports = function (options) {
             // Alias paths in order to avoid messy imports everywhere.
             // Also allows for complex path configuration in one location. 
             alias: {
+                core: configHelper.appPath('app/core/')
             }
         },
 

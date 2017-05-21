@@ -21,16 +21,6 @@ module.exports = {
     // File parsing rules and loaders
     module: {
         rules: [
-            //{
-            //    test: /\.ts$/,
-            //    include: /specs/,
-            //    loader: 'awesome-typescript-loader?silent=true',
-            //    exclude: ['/node_modules/', '../Baldr.Web/node_modules/']
-            //},
-            //{
-            //    loader: 'angular2-template-loader',
-            //    exclude: [/node_modules/, '../Baldr.Web/node_modules/']
-            //},
             {
                 test: /\.ts$/,
                 use: [
@@ -43,8 +33,7 @@ module.exports = {
                     {
                         loader: 'angular2-template-loader'
                     }
-                ],
-                //exclude: [/\.(spec|e2e)\.ts$/]
+                ]
             },
             {
                 test: /\.html$/,
@@ -53,7 +42,6 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['to-string-loader', 'css-loader'],
-               // exclude: [configHelper.appPath('.', 'styles')]
             },
         ]
     },

@@ -12,6 +12,8 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 module.exports = function (options) {
     return webpackMerge(commonConfig({env: ENV}), {
 
+        devtool: 'inline-source-map',
+
         // Location of webpack output
         output: {
         },

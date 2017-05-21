@@ -30,8 +30,21 @@ namespace Baldr
 
             services.AddDataProvider();
 
+            // Add CORS support
+            // ** NOTE : configure CORS to be much more restrictive **
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(
+                    options => options.RespectBrowserAcceptHeader = true
+                );
 
             // Automapper
             services.AddAutoMapper();
@@ -58,7 +71,10 @@ namespace Baldr
             loggerFactory.AddDebug();
             loggerFactory.AddFile($"{logFilePath}/baldr-{{Date}}.log");
             loggerFactory.AddSerilog(serilog);
+            app.UseCors("CorsPolicy");
             app.UseMvc();
+
+
         }
     }
 }

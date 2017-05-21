@@ -58,14 +58,11 @@ namespace Baldr.IntegrationTests
             };
 
             this.UnitOfWork.GetRepository<Institution>().Add(inst);
-
             this.UnitOfWork.Save();
 
             var getInst = this.UnitOfWork.GetRepository<Institution>().Get(10);
-
             Assert.AreEqual(inst.Name, getInst.Name);
             Assert.AreEqual(inst.IsActive, getInst.IsActive);
-
             Assert.AreEqual(inst.ContactInfo.Address1, getInst.ContactInfo.Address1);
             Assert.AreEqual(inst.ContactInfo.Address2, getInst.ContactInfo.Address2);
             Assert.AreEqual(inst.ContactInfo.Address3, getInst.ContactInfo.Address3);
@@ -101,11 +98,9 @@ namespace Baldr.IntegrationTests
             };
 
             this.UnitOfWork.GetRepository<Institution>().Add(inst);
-
             this.UnitOfWork.Save();
 
             var getInst = this.UnitOfWork.GetRepository<Institution>().Get(10);
-
             Assert.AreEqual(inst.Name, getInst.Name);
             Assert.AreEqual(inst.IsActive, getInst.IsActive);
 
