@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using Data.EntityFramework.Startup;
 using Serilog;
 using AutoMapper;
-using Baldr.Modules.Institution.V1.ApiMappers;
 
 namespace Baldr
 {

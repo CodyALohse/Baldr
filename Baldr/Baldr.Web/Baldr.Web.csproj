@@ -20,8 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot/dist\89889688147bd7575d6327160d64e760.svg" />
+    <Content Remove="wwwroot/dist\app.bundle.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
   <ItemGroup>

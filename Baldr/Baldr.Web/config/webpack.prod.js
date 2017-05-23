@@ -1,16 +1,26 @@
-// https://github.com/AngularClass/angular-starter
+const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 
-switch(process.env.NODE_ENV) {
-  case 'prod':
-  case 'production':
-    module.exports = require('./config/webpack.prod')({env: 'production'});
-    break;
-  case 'test':
-  case 'testing':
-    module.exports = require('./config/webpack.test')({env: 'test'});
-    break;
-  case 'dev':
-  case 'development':
-  default:
-    module.exports = require('./config/webpack.dev')({env: 'development'});
+const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
+const configHelper = require('./configHelper.js');
+
+const ENV = process.env.ENV = process.env.NODE_ENV = 'production';
+
+// All paths are realtive to this files location in the project.
+module.exports = function(options) {
+    return webpackMerge(commonConfig({ env: ENV }), {
+
+        // Location of webpack output
+        output: {
+        },
+
+        // File parsing rules and loaders
+        module: {
+            rules: []
+        },
+
+        resolve: {
+        },
+
+        plugins: []
+    });
 }

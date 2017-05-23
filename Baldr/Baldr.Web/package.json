@@ -2,8 +2,11 @@
   "name": "Baldr_Web",
   "version": "0.0.0",
   "scripts": {
-    "build:dev": "npm run clean && npm run webpack -- --config config/webpack.dev.js --progress --profile",
-    "clean": "npm run rimraf -- wwwroot/dist/*",
+    "build:dev": "npm run clean:app && npm run webpack -- --env development --config config/webpack.dev.js --progress --profile",
+    "build:dev-dll": "npm run clean:dll && npm run webpack -- --env development --config config/webpack.vendor.js --progress --profile",
+    "clean:app": "npm run rimraf -- wwwroot/dist/app/*",
+    "clean:dll": "npm run rimraf -- wwwroot/dist/dll/*",
+    "clean:all": "npm run rimraf -- wwwroot/dist/*",
     "rimraf": "rimraf",
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
     "test": "karma start config/karma.conf.js"

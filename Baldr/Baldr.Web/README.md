@@ -4,3 +4,4 @@
 * Angular 4
 * Webpack 2
 
+## package.json
