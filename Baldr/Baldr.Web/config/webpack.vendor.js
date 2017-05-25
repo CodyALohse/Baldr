@@ -1,3 +1,4 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 const configHelper = require('./configHelper.js');
 const commonConfig = require('./webpack.common.js');
@@ -10,14 +11,13 @@ module.exports = function(env) {
     return {
 
         entry: {
-            'vendor': [configHelper.appPath('vendor.ts')]
+            vendor: [configHelper.appPath('vendor.ts')]
         },
 
         // Location of webpack output
         output: {
-            path: configHelper.projRootPath('wwwroot/dist/dll'),
+            path: configHelper.appBuildPath('dll'),
             filename: '[name].bundle.js',
-            publicPath: 'dist/'
         },
 
         // File parsing rules and loaders
@@ -37,14 +37,14 @@ module.exports = function(env) {
                             loader: 'angular2-template-loader'
                         }
                     ],
-                    exclude: [/\.(spec|e2e)\.ts$/]
+                    exclude: [/src/]
                 }
                ]
         },
 
         resolve: {
             extensions: ['.ts', '.js'],
-            modules: [configHelper.appPath('.'), configHelper.projRootPath('node_modules')]
+            modules: [configHelper.projRootPath('node_modules')]
         },
 
         plugins: [            
@@ -54,10 +54,13 @@ module.exports = function(env) {
             }),
 
             new webpack.DllPlugin({
-                path: configHelper.distPath('dll/[name]-manifest.json'),
+                path: configHelper.appBuildPath('dll/[name]-manifest.json'),
                 name: '[name]',
-                context: configHelper.distPath('dll')
-            })
+            }),
+
+             new BundleAnalyzerPlugin({
+                        analyzerMode: 'static'
+             })
         ]
     };
 }

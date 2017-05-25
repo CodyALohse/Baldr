@@ -1,4 +1,4 @@
-﻿import '@angular/platform-browser';
+﻿import '@angular/platform-browser'; // TODO I think this is no longer needed
 import '@angular/platform-browser-dynamic';
 import '@angular/core';
 import '@angular/common';
@@ -7,7 +7,51 @@ import '@angular/http';
 import '@angular/router';
     //'@angularclass/hmr', // hot module reload
 import 'rxjs';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
-if (!IS_PROD) {
-    // IS_PROD is a global variable created in the webpack config that webpack performs a string replace when encountered
+
+/**
+ * Polyfills
+ */
+
+/* import 'ie-shim'; *//* Internet Explorer 9 support */
+
+/* import 'core-js/es6'; */
+
+/**
+ * Added parts of es6 which are necessary for your project or your browser support requirements.
+ */
+import 'core-js/es6/symbol';
+import 'core-js/es6/object';
+import 'core-js/es6/function';
+import 'core-js/es6/parse-int';
+import 'core-js/es6/parse-float';
+import 'core-js/es6/number';
+import 'core-js/es6/math';
+import 'core-js/es6/string';
+import 'core-js/es6/date';
+import 'core-js/es6/array';
+import 'core-js/es6/regexp';
+import 'core-js/es6/map';
+import 'core-js/es6/set';
+import 'core-js/es6/weak-map';
+import 'core-js/es6/weak-set';
+import 'core-js/es6/typed';
+import 'core-js/es6/reflect';
+import 'core-js/es7/reflect';
+/**
+ * See issue https://github.com/AngularClass/angular2-webpack-starter/issues/709
+ */
+ /* import 'core-js/es6/promise'; */
+
+import 'core-js/es7/reflect';
+import 'zone.js/dist/zone';
+
+if(!IS_PROD){
+  // Development
+  Error.stackTraceLimit = Infinity;
+
+  /* tslint:disable no-var-requires */
+  require('zone.js/dist/long-stack-trace-zone');
 }

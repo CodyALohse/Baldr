@@ -1,3 +1,4 @@
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
@@ -18,8 +19,7 @@ module.exports = function (env) {
         // Webpack compilation starts here.
         // Multiple entry points are possible. Useful for splitting out code features to be delivered to the client separately.
         entry: {
-            'polyfills': configHelper.appPath('polyfills.ts'),
-            'app': configHelper.appPath('main.ts')
+            app: configHelper.appPath('main.ts')
         },
 
         // Location of webpack output
@@ -47,7 +47,7 @@ module.exports = function (env) {
                             loader: 'angular2-template-loader'
                         }
                     ],
-                    exclude: [configHelper.projRootPath('node_modules'), /\.(spec|e2e)\.ts$/]
+                    exclude: [/'node_modules'/]
                 },
 
                 {
@@ -83,13 +83,13 @@ module.exports = function (env) {
             // Fixes issue where reflect is not being seen by another module
             new webpack.ProvidePlugin({ Reflect: 'core-js/es7/reflect' }),
 
+            // Creates global constants that can be used in code that webpack will string replace
             new webpack.DefinePlugin({
                 IS_PROD: JSON.stringify(isProd)
             }),
 
             new webpack.DllReferencePlugin({
-                context: configHelper.appPath('.'),
-                manifest: require(configHelper.distPath('dll/vendor-manifest.json'))
+                manifest: require(configHelper.appBuildPath('dll/vendor-manifest.json')),
             }),
 
             // Creates the html script imports in index.html
@@ -100,13 +100,22 @@ module.exports = function (env) {
                 inject: 'body'
             }),
 
+            // Adds the vendor.bundle.js to the index.html file
             new AddAssetHtmlPlugin([
                 {
                     includeSourcemap: false,
-                    publicPath: 'dist/dll/',
-                    filepath: configHelper.distPath(`dll/vendor.bundle.js`)
+                    publicPath: 'dist/app',
+                    filepath: configHelper.appBuildPath(`dll/vendor.bundle.js`)
                 }
             ]),
+
+           //  new webpack.optimize.CommonsChunkPlugin({
+           //     name: 'vendor' // Specify the common bundle's name.
+           // })
+
+            new BundleAnalyzerPlugin({
+                        analyzerMode: 'static'
+                    })
         ]
     }
 }

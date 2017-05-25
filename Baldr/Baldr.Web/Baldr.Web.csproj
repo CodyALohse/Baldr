@@ -23,6 +23,7 @@
     <Content Remove="wwwroot/dist\app.bundle.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ClientApp\build\dll\" />
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
