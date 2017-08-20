@@ -32,7 +32,7 @@ namespace Baldr
             else
             {
                 BootstrapLogger.Log("Running as a non-service.");
-                Host.BuildAndRunHost(pathToContentRoot);
+                Host.BuildAndRunHost(pathToContentRoot, args);
             }
         }
     }

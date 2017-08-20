@@ -1,7 +1,9 @@
 using Data.EntityFramework.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
 
 namespace Data.EntityFramework
 {
@@ -9,19 +11,21 @@ namespace Data.EntityFramework
     /// This class is used for running EF CLI options.
     /// Without it Migrations and Updates fail stating a missing data provider
     /// </summary>
-    public class EntityApplicationContextFactory : IDbContextFactory<ApplicationDbContext>
+    public class EntityApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        public ApplicationDbContext Create(DbContextFactoryOptions options)
+        public ApplicationDbContext CreateDbContext(string[] args)
         {
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
             var builder = new ConfigurationBuilder()
-                .SetBasePath(options.ContentRootPath)
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{options.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: true);
 
             IConfigurationRoot config = builder.Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.GetDbProvider(options.EnvironmentName, config["ConnectionStrings:DefaultConnection"]);
+            optionsBuilder.GetDbProvider(environmentName, config["ConnectionStrings:DefaultConnection"]);
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

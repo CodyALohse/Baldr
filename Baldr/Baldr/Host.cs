@@ -1,4 +1,5 @@
 ﻿using DasMulli.Win32.ServiceUtils;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,20 +7,18 @@ namespace Baldr
 {
     public static class Host
     {
-        public static IWebHost BuildHost(string pathToContentRoot)
+        public static IWebHost BuildHost(string pathToContentRoot, string[] args)
         {
-            return new WebHostBuilder()
-              .UseKestrel()
-              .UseContentRoot(pathToContentRoot)
-              .UseIISIntegration()
-              .UseStartup<Startup>()
-              .UseApplicationInsights()
-              .Build();
+            return WebHost.CreateDefaultBuilder(args)
+                .UseContentRoot(pathToContentRoot)
+                .UseApplicationInsights()
+                .UseStartup<Startup>()
+                .Build();
         }
 
-        public static void BuildAndRunHost(string pathToContentRoot)
+        public static void BuildAndRunHost(string pathToContentRoot, string[] args)
         {
-            var host = BuildHost(pathToContentRoot);
+            var host = BuildHost(pathToContentRoot, args);
             host.Run();
         }
 
@@ -32,7 +31,7 @@ namespace Baldr
         /// <returns></returns>
         public static IWebHost ServiceBuildHost(string pathToContentRoot, bool serviceStop, ServiceStoppedCallback serviceStopCallback)
         {
-            var host = BuildHost(pathToContentRoot);
+            var host = BuildHost(pathToContentRoot, null);
 
             // Make sure the windows service is stopped if the ASP.NET Core stack stops for any reason
             host
