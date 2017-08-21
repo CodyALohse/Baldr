@@ -14,7 +14,7 @@
       "core/*": [ "./ClientApp/src/app/core/*" ]
     },
     "lib": [ "es6", "dom" ],
-    "types": [ "node", "webpack", "webpack-env", "jasmine", "karma" ],
+    "types": [ "node", "webpack", "webpack-env" ],
     "typeRoots": [
       "node_modules/@types"
     ]

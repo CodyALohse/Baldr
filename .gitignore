@@ -22,3 +22,5 @@ Baldr/Baldr.Web.Tests/dist/*
 Baldr/Baldr.Web/.awcache/*
 .vs/Baldr/v15/sqlite3/storage.ide
 .vs/config/applicationhost.config
+Baldr/Baldr.Web.Tests/Baldr.Web.Tests.csproj.user
+Baldr/Baldr.Web.Tests/npm-debug.log

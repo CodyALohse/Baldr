@@ -1,30 +1,24 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { Institution } from './institution.model';
+﻿import { Institution } from './institution.model';
 import { InstitutionService } from './institution.service';
 
-@Component({
-    selector: 'institution-list',
-    templateUrl: './institution-list.component.html',
-    providers: [InstitutionService],
-    styles: []
-})
-export class InstitutionListComponent implements OnInit {
 
-    public institution: Institution;
-    public errorMessage: string;
+export class InstitutionListComponent  {
 
-    constructor(private institutionService: InstitutionService) { }
+    //public institution: Institution;
+    //public errorMessage: string;
 
-    ngOnInit() {
-        this.getInstitutions();
-    }
+    //constructor(private institutionService: InstitutionService) { }
 
-    public getInstitutions() {
-        this.institutionService.getInstitution()
-            .subscribe(
-            institution => this.institution = <Institution>institution,
-            error => this.errorMessage = <any>error
-            );
-    }
+    ////ngOnInit() {
+    ////    this.getInstitutions();
+    ////}
+
+    //public getInstitutions() {
+    //    this.institutionService.getInstitution()
+    //        .subscribe(
+    //        institution => this.institution = <Institution>institution,
+    //        error => this.errorMessage = <any>error
+    //        );
+    //}
 
 }

@@ -42,9 +42,6 @@ module.exports = function (env) {
                                 configFileName: 'tsconfig.json',
                                 useCache: !isProd
                             }
-                        },
-                        {
-                            loader: 'angular2-template-loader'
                         }
                     ],
                     exclude: [/'node_modules'/]
@@ -81,7 +78,7 @@ module.exports = function (env) {
             new CheckerPlugin(),
 
             // Fixes issue where reflect is not being seen by another module
-            new webpack.ProvidePlugin({ Reflect: 'core-js/es7/reflect' }),
+            //new webpack.ProvidePlugin({ Reflect: 'core-js/es7/reflect' }),
 
             // Creates global constants that can be used in code that webpack will string replace
             new webpack.DefinePlugin({
@@ -93,12 +90,12 @@ module.exports = function (env) {
             }),
 
             // Creates the html script imports in index.html
-            new HtmlWebpackPlugin({
-                template: configHelper.projRootPath('Views/Home/Index_Template.cshtml'),
-                title: 'Baldr',
-                filename: configHelper.projRootPath('Views/Home/Index.cshtml'),
-                inject: 'body'
-            }),
+            //new HtmlWebpackPlugin({
+            //    template: configHelper.projRootPath('Views/Home/Index_Template.cshtml'),
+            //    title: 'Baldr',
+            //    filename: configHelper.projRootPath('Views/Home/Index.cshtml'),
+            //    inject: 'body'
+            //}),
 
             // Adds the vendor.bundle.js to the index.html file
             new AddAssetHtmlPlugin([
@@ -113,9 +110,9 @@ module.exports = function (env) {
            //     name: 'vendor' // Specify the common bundle's name.
            // })
 
-            new BundleAnalyzerPlugin({
-                        analyzerMode: 'static'
-                    })
+            //new BundleAnalyzerPlugin({
+            //            analyzerMode: 'static'
+            //        })
         ]
     }
 }

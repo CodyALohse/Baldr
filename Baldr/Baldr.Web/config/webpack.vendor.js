@@ -32,9 +32,6 @@ module.exports = function(env) {
                                 configFileName: 'tsconfig.json',
                                 useCache: !isProd
                             }
-                        },
-                        {
-                            loader: 'angular2-template-loader'
                         }
                     ],
                     exclude: [/src/]
@@ -58,9 +55,9 @@ module.exports = function(env) {
                 name: '[name]',
             }),
 
-             new BundleAnalyzerPlugin({
-                        analyzerMode: 'static'
-             })
+             //new BundleAnalyzerPlugin({
+             //           analyzerMode: 'static'
+             //})
         ]
     };
 }
