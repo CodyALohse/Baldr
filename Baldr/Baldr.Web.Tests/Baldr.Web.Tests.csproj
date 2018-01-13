@@ -13,6 +13,7 @@
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
