@@ -98,13 +98,13 @@ module.exports = function (env) {
             //}),
 
             // Adds the vendor.bundle.js to the index.html file
-            new AddAssetHtmlPlugin([
-                {
-                    includeSourcemap: false,
-                    publicPath: 'dist/app',
-                    filepath: configHelper.appBuildPath(`dll/vendor.bundle.js`)
-                }
-            ]),
+            //new AddAssetHtmlPlugin([
+            //    {
+            //        includeSourcemap: false,
+            //        publicPath: 'dist/app',
+            //        filepath: configHelper.appBuildPath(`dll/vendor.bundle.js`)
+            //    }
+            //]),
 
            //  new webpack.optimize.CommonsChunkPlugin({
            //     name: 'vendor' // Specify the common bundle's name.

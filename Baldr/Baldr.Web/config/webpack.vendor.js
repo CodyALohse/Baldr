@@ -16,7 +16,8 @@ module.exports = function(env) {
 
         // Location of webpack output
         output: {
-            path: configHelper.appBuildPath('dll'),
+           // path: configHelper.appBuildPath('dll'),
+            path: configHelper.projRootPath('wwwroot/dist/app'),
             filename: '[name].bundle.js',
         },
 

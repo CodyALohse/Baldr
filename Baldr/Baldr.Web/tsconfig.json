@@ -9,8 +9,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": "./",
     "paths": {
+
       // Define alias's for easy importing
-      // Also need to define the same alias in webpack config file
+      // REQUIRED: Define the same alias's in the webpack config file
       "core/*": [ "./ClientApp/src/app/core/*" ]
     },
     "lib": [ "es6", "dom" ],
