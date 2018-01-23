@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core\Core.csproj", "{A51CD7B2-8A4D-4424-962C-73FC90DD3ED2}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Baldr.Web", "Baldr\Baldr.Web\Baldr.Web.csproj", "{8830F69E-5FA7-4927-B478-D72BA57E1299}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Baldr.Web.Tests", "Baldr\Baldr.Web.Tests\Baldr.Web.Tests.csproj", "{8C52F3A4-805E-4760-9130-F7AB6CAADE43}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2596637E-4A20-4367-8EB4-A438576ECAFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{8C52F3A4-805E-4760-9130-F7AB6CAADE43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C52F3A4-805E-4760-9130-F7AB6CAADE43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C52F3A4-805E-4760-9130-F7AB6CAADE43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2596637E-4A20-4367-8EB4-A438576ECAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2596637E-4A20-4367-8EB4-A438576ECAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2596637E-4A20-4367-8EB4-A438576ECAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2596637E-4A20-4367-8EB4-A438576ECAFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

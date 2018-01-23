@@ -5,6 +5,8 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <InformationalVersion>2.0.0.0</InformationalVersion>
+    <Authors>Cody A Lohse</Authors>
+    <Company>SerCir</Company>
   </PropertyGroup>
 
   <ItemGroup>

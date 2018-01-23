@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  baldr.web:
+    image: baldr.web
+    build:
+      context: .\Baldr\Baldr.Web\
+      dockerfile: Dockerfile
+    ports:
+      - "45500:80"
+    depends_on:
+      - baldr.api
+  baldr.api:
+    image: baldr.api
+    build: 
+      context: .\Baldr\Baldr\
+      dockerfile: Dockerfile
+    ports:
+      - "45000:80"
+ 

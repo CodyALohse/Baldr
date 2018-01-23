@@ -24,3 +24,7 @@ Baldr/Baldr.Web/.awcache/*
 .vs/config/applicationhost.config
 Baldr/Baldr.Web.Tests/Baldr.Web.Tests.csproj.user
 Baldr/Baldr.Web.Tests/npm-debug.log
+Baldr/Baldr/nuget.config
+.vs/*
+Baldr/Baldr.Web/out/*
+obj/*
