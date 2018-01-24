@@ -20,6 +20,10 @@
       "node_modules/@types"
     ]
   },
+  "include": [
+    "**/*"
+  ],
   "exclude": [ "bin", "node_modules" ],
-  "atom": { "rewriteTsconfig": false }
+  "atom": { "rewriteTsconfig": false },
+  "compileOnSave": false
 }
