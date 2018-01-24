@@ -12,19 +12,6 @@
     "test": "karma start config/karma.conf.js"
   },
   "dependencies": {
-    "aurelia-framework": "^1.1.4",
-    "bootstrap": "^3.3.7",
-    "core-js": "^2.4.1",
-    "css": "^2.2.1",
-    "es6-shim": "^0.35.1",
-    "event-source-polyfill": "^0.0.7",
-    "isomorphic-fetch": "^2.2.1",
-    "jquery": "^2.2.1",
-    "preboot": "^4.5.2",
-    "reflect-metadata": "^0.1.10",
-    "rxjs": "^5.0.1",
-    "systemjs": "^0.20.12",
-    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "@types/node": "^6.0.42",

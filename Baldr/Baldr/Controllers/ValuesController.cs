@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Core;
 using Baldr.Models;
 using Microsoft.Extensions.Logging;
+using Core;
 
 namespace Baldr.Controllers
 {

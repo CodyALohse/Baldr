@@ -45,6 +45,11 @@ namespace Baldr
                     options => options.RespectBrowserAcceptHeader = true
                 );
 
+            // Swagger
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Baldr.Api", Version = "v1" });
+            });
+
             // Automapper
             services.AddAutoMapper();
 
@@ -70,10 +75,15 @@ namespace Baldr
             loggerFactory.AddDebug();
             loggerFactory.AddFile($"{logFilePath}/baldr-{{Date}}.log");
             loggerFactory.AddSerilog(serilog);
+
             app.UseCors("CorsPolicy");
             app.UseMvc();
-
-
+            app.UseStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Baldr.Api");
+            });
         }
     }
 }
