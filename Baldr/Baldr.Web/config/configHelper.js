@@ -1,5 +1,5 @@
 ﻿// ConfigHelper is used as a central location to define absolute paths
-// that can be used for configuration.
+// used for configuration.
 
 var path = require('path');
 
