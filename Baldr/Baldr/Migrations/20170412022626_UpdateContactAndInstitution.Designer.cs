@@ -8,7 +8,7 @@ using Baldr.Models.Enums;
 
 namespace Baldr.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(BaldrDbContext))]
     [Migration("20170412022626_UpdateContactAndInstitution")]
     partial class UpdateContactAndInstitution
     {

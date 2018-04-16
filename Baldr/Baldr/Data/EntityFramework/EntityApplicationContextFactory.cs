@@ -11,9 +11,9 @@ namespace Data.EntityFramework
     /// This class is used for running EF CLI options.
     /// Without it Migrations and Updates fail stating a missing data provider
     /// </summary>
-    public class EntityApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    public class EntityApplicationContextFactory : IDesignTimeDbContextFactory<BaldrDbContext>
     {
-        public ApplicationDbContext CreateDbContext(string[] args)
+        public BaldrDbContext CreateDbContext(string[] args)
         {
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -24,10 +24,10 @@ namespace Data.EntityFramework
 
             IConfigurationRoot config = builder.Build();
 
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<BaldrDbContext>();
             optionsBuilder.GetDbProvider(environmentName, config["ConnectionStrings:DefaultConnection"]);
 
-            return new ApplicationDbContext(optionsBuilder.Options);
+            return new BaldrDbContext(optionsBuilder.Options);
         }
     }
 }

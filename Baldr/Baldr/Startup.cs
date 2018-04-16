@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Data.EntityFramework.Startup;
 using Serilog;
 using AutoMapper;
+using Data.EntityFramework;
 
 namespace Baldr
 {
@@ -27,7 +28,7 @@ namespace Baldr
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDataProvider();
+            services.AddDataProvider<BaldrDbContext>();
 
             // Add CORS support
             // ** NOTE : configure CORS to be much more restrictive **

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Baldr.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Baldr.Api.Tests.Integration;
 
 namespace Baldr.IntegrationTests
 {
@@ -15,7 +16,7 @@ namespace Baldr.IntegrationTests
     public class InstitutionTests
     {
         protected Mock<IServiceProvider> ServiceProviderMock;
-        protected EntityContextProvider EntityContextProvider;
+        protected EntityContextProvider<BaldrDbContext> EntityContextProvider;
         protected IUnitOfWork UnitOfWork;
         protected Mock<IConfiguration> Configuration;
         protected Mock<IHostingEnvironment> HostingEnvironment;
@@ -32,7 +33,8 @@ namespace Baldr.IntegrationTests
             this.HostingEnvironment = new Mock<IHostingEnvironment>();
             this.HostingEnvironment.Setup(h => h.EnvironmentName).Returns("IntegrationTesting");
 
-            this.EntityContextProvider = new EntityContextProvider(this.Configuration.Object, this.HostingEnvironment.Object);
+            var dbContextFactory = new TestDbContextFactory(this.HostingEnvironment.Object, this.Configuration.Object);
+            this.EntityContextProvider = new EntityContextProvider<BaldrDbContext>(this.Configuration.Object, this.HostingEnvironment.Object, dbContextFactory);
 
             this.UnitOfWork = new UnitOfWork(this.EntityContextProvider, this.ServiceProviderMock.Object);
         }

@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.EntityFramework
 {
-    public class ApplicationDbContext : DbContext
+    public class BaldrDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public BaldrDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Account> Accounts { get; set; }
 
