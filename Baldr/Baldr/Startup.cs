@@ -7,6 +7,7 @@ using Data.EntityFramework.Startup;
 using Serilog;
 using AutoMapper;
 using Data.EntityFramework;
+using Core.Data.EntityFramework;
 
 namespace Baldr
 {
@@ -27,7 +28,9 @@ namespace Baldr
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            var dbContextFactory = new EntityApplicationContextFactory();
+            dbContextFactory.CreateDbContext();
+            services.AddSingleton<IDbContextFactory<BaldrDbContext>, EntityApplicationContextFactory>();
             services.AddDataProvider<BaldrDbContext>();
 
             // Add CORS support

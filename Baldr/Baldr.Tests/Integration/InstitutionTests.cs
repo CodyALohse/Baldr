@@ -34,7 +34,7 @@ namespace Baldr.IntegrationTests
             this.HostingEnvironment.Setup(h => h.EnvironmentName).Returns("IntegrationTesting");
 
             var dbContextFactory = new TestDbContextFactory(this.HostingEnvironment.Object, this.Configuration.Object);
-            this.EntityContextProvider = new EntityContextProvider<BaldrDbContext>(this.Configuration.Object, this.HostingEnvironment.Object, dbContextFactory);
+            this.EntityContextProvider = new EntityContextProvider<BaldrDbContext>(dbContextFactory);
 
             this.UnitOfWork = new UnitOfWork(this.EntityContextProvider, this.ServiceProviderMock.Object);
         }
